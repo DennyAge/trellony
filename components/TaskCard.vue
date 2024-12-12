@@ -21,11 +21,11 @@
     </div>
 
     <div v-if="isExpanded" class="task-card-details">
-      <p><strong>Description:</strong> {{ task.description }}</p>
-      <p><strong>Responsible person:</strong> {{ task.creator }}</p>
-      <p><strong>Executors:</strong> {{ task.assignee }}</p>
-      <p><strong>Priority:</strong> {{ task.priority }}</p>
-      <p><strong>Status:</strong> {{ task.status }}</p>
+      <p><strong>Опис:</strong> {{ task.description }}</p>
+      <p><strong>Відповідальна особа:</strong> {{ task.creator }}</p>
+      <p><strong>Відповідальна особа:</strong> {{ task.assignee }}</p>
+      <p><strong>Статус:</strong> {{ task.status }}</p>
+      <p><strong>Приорітет:</strong> {{ task.priority }}</p>
     </div>
   </div>
 </template>
