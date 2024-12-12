@@ -1,20 +1,23 @@
 <template>
-  <header>
-    <NuxtLink to="/about">About</NuxtLink>
-    <NuxtLink to="/contacts">Contacts</NuxtLink>
+  <header class="header">
+    <h1>Trellony</h1>
   </header>
-  <main>
+  <main class="container">
     <slot />
   </main>
 </template>
 
 <style scoped>
-a {
-  padding: 0 10px;
-  text-decoration: none;
-  color: black;
+.header {
+  height: 3.75rem;
+  display: flex;
+  align-items: center;
+  padding: 0.625rem 1.875rem;
+  background: rgba(255, 255, 255, .1);
+  backdrop-filter: blur(0.3rem);
+  color: var(--neutral-10-color);
 }
-a:hover {
-  color: red;
+.container {
+  padding: 1.25rem 3.75rem;
 }
 </style>

@@ -10,40 +10,50 @@
         </button>
       </div>
       <div class="modal-body">
-        <v-form ref="formRef">
+        <v-form
+            ref="formRef"
+            class="form"
+        >
           <v-text-field
               v-model="task.title"
-              label="Title"
+              label="Назва"
               :rules="[requiredRule]"
               required
+              variant="outlined"
           />
           <v-textarea
               v-model="task.description"
-              label="Description"
+              label="Опис"
               :rules="[requiredRule]"
               required
+              variant="outlined"
+              auto-grow
           />
           <v-text-field
               v-model="task.creator"
-              label="Creator"
+              label="Відповідальна особа"
               :rules="[requiredRule]"
               required
+              variant="outlined"
           /> 
           <v-text-field
               v-model="task.assignee"
-              label="Assignee"
+              label="Виконавці"
               :rules="[requiredRule]"
               required
-          />
-          <v-select
-              v-model="task.priority"
-              label="Priority"
-              :items="['Low', 'Medium', 'High']"
+              variant="outlined"
           />
           <v-select
               v-model="task.status"
-              label="Status"
+              label="Статус"
               :items="['TODO', 'In Progress', 'Done']"
+              variant="outlined"
+          />
+          <v-select
+              v-model="task.priority"
+              label="Приорітет"
+              :items="['Low', 'Medium', 'High']"
+              variant="outlined"
           />
         </v-form>
       </div>
@@ -52,13 +62,13 @@
             class="modal-footer__btn"
             @click="closeModal"
         >
-          close
+          Скасувати
         </button>
         <button
             class="modal-footer__btn"
             @click="submitForm"
         >
-          save
+          {{ isEdit ?  'Зберегти' : 'Додати' }}
         </button>
       </div>
     </div>
@@ -74,13 +84,17 @@ const props = defineProps( {
   task: Object,
 } );
 
-const emit = defineEmits( [ 'close', 'updateTask', 'createTask' ] );
+const emit = defineEmits( [
+  'close',
+  'updateTask',
+  'createTask'
+] );
 
 const oldTaskValue = props.task;
 const task = ref( { ...props.task } );
-
 const formRef = ref( null );
-const requiredRule = value => !!value || 'This field is required.';
+
+const requiredRule = value => !!value || 'Це поле є обов\'язковим для заповнення.';
 
 const submitForm =  async () => {
   const isValid = await formRef.value.validate();
@@ -89,7 +103,7 @@ const submitForm =  async () => {
   }
 
   if ( props.isEdit ) {
-    emit( 'updateTask', oldTaskValue, task.value.status );
+    emit( 'updateTask', task.value,  oldTaskValue, task.value.status );
   } else {
     emit( 'createTask', task.value );
   }
@@ -114,19 +128,19 @@ const closeModal = () => {
   align-items: center;
 }
 .modal {
-  background: #fff;
+  background: var(--neutral-10-color);
   border-radius: 8px;
   text-align: center;
   width: max-content;
   min-width: 15em;
-  box-shadow: 0 0.0625rem 1.5rem 0.5rem rgba(0, 0, 0, 0.08), 0 0 0.0625rem rgba(20, 20, 20, 0.08);
+  box-shadow: var(--large-shadow);
 }
 .modal-header {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   width: 100%;
-  border-bottom: 1px solid #9E9E9E;
+  border-bottom: 1px solid var(--neutral-60-color);
   padding: 0.5em 1em;
 }
 .close-btn {
@@ -135,10 +149,6 @@ const closeModal = () => {
   padding: 0;
   border: none;
   background: transparent;
-}
-.close-btn img {
-  width: 1.5em;
-  height: 1.5em;
 }
 .modal-body {
   display: flex;
@@ -154,7 +164,7 @@ const closeModal = () => {
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem 2rem;
-  border-top: 0.063rem solid #9E9E9E;
+  border-top: 0.063rem solid var(--neutral-60-color);
 }
 .modal-footer__btn {
   width: 100%;
@@ -162,15 +172,21 @@ const closeModal = () => {
   justify-content: center;
   align-items: center;
   background: #fff;
-  border: 0.063rem solid #9E9E9E;
+  border: 0.063rem solid var(--neutral-60-color);
   border-radius: 0.4rem;
   padding: 0.5rem 1rem;
   cursor: pointer;
-  color: #000;
+  color: var(--neutral-100-color);
 }
 .modal-footer__btn:hover {
-  background: #9E9E9E;
-  color: #000;
+  background: var(--neutral-60-color);
+  color: var(--neutral-10-color);
   font-weight: 700;
+}
+.form {
+  min-width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 </style>

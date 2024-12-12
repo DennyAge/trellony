@@ -1,19 +1,11 @@
-// taskStore.js
 import { defineStore } from 'pinia';
 
 export const useTaskStore = defineStore( 'taskStore', {
   state: () => ( {
     tasks: {
-      TODO: [
-        { id: 1, title: 'Task 1', description: 'Description 1', creator: 'Alice', assignee: 'John', priority: 'High', status: 'TODO' },
-        { id: 2, title: 'Task 2', description: 'Description 2', creator: 'Alice', assignee: 'Alice', priority: 'Low', status: 'TODO' },
-      ],
-      'In Progress': [
-        { id: 3, title: 'Task 3', description: 'Description 3', creator: 'Alice',  assignee: 'Bob', priority: 'Medium', status: 'In Progress' },
-      ],
-      Done: [
-        { id: 4, title: 'Task 4', description: 'Description 4', creator: 'Alice',  assignee: 'Eve', priority: 'High', status: 'Done' },
-      ],
+      'TODO': [],
+      'In Progress': [],
+      'Done': [],
     },
   } ),
   actions: {
@@ -31,6 +23,16 @@ export const useTaskStore = defineStore( 'taskStore', {
 
       task.status = newStatus;
       newColumnTasks.push( task );
+    },
+    updateTask( task ) {
+      const column = this.tasks[task.status];
+      const index = column.findIndex( t => t.id === task.id );
+
+      if ( index !== -1 ) {
+        column[index] = { ...task };
+      } else {
+        console.error( 'error updating task' );
+      }
     },
     deleteTask( taskId ) {
       Object.keys( this.tasks ).forEach( ( status ) => {
