@@ -66,8 +66,15 @@ const onDrop = ( task, newStatus ) => {
 
 <style scoped>
 .task-dashboard {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 1.875rem;
+}
+
+@media screen and (max-width: 900px) {
+  .task-dashboard {
+    grid-template-columns: 1fr;
+  }
 }
 
 </style>
