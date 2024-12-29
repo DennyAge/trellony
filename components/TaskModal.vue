@@ -194,7 +194,6 @@ const closeModal = () => {
     width: 100%;
     height: 100dvh;
     overflow: scroll;
-    border-radius: 0;
   }
 }
 </style>
