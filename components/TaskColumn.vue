@@ -135,4 +135,11 @@ const onDrop = ( ) => {
   border-radius: 0.313rem;
 }
 
+@media screen and (max-width: 500px) {
+  .task-column {
+    padding: 0.875rem;
+  }
+
+}
+
 </style>

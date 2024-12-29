@@ -192,7 +192,7 @@ const closeModal = () => {
 @media screen and (max-width: 500px) {
   .modal {
     width: 100%;
-    height: 100vh;
+    height: 100dvh;
     overflow: scroll;
   }
 }
