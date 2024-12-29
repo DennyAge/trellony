@@ -189,4 +189,11 @@ const closeModal = () => {
   flex-direction: column;
   gap: 1rem;
 }
+@media screen and (max-width: 500px) {
+  .modal {
+    width: 100%;
+    height: 100vh;
+    overflow: scroll;
+  }
+}
 </style>
